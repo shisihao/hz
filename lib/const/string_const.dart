@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class StringConst {
   static const String APP_NAME = "聚秀矿场";
   static const Color HOME_BG_COLOR = Color(0xFFF1F2F6);
+  static const Color BG_COLOR = Color(0xFFFFFFFF);
 
 
   static const String CREATE_BY = "Created By Volunteer";

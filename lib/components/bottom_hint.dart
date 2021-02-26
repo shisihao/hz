@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BottomHintView extends StatefulWidget {
-  @override
-  _BottomHintViewState createState() => _BottomHintViewState();
-}
-
-class _BottomHintViewState extends State<BottomHintView> {
+class BottomHintView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

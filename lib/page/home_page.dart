@@ -1,131 +1,18 @@
 import "package:flutter/material.dart";
-import '../const/string_const.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../components/bottom_hint.dart';
-import '../api/home.dart';
-import '../util/request.dart';
-import '../util/flutter_page_indicator.dart';
 
 class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        child: AppBar(
-          leadingWidth: 102,
-          leading: Container(
-            child: Padding(
-              padding: EdgeInsets.only(left: 12, right: 0, top: 0, bottom: 0),
-              child: /*Image.asset('assets/images/home/home_icon_mtlogo@2x.png',
-                  width: 102, height: 32.5),*/
-                  Image.network('https://gw.alicdn.com/tfs/TB1ugm9f5cKOu4jSZKbXXc19XXa-356-76.png',width: 102, height: 32.5)
-            ),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.chat),
-              onPressed: () {
-                print('客服');
-              },
-            )
-          ],
-          centerTitle: false,
-          elevation: 0,
-          backgroundColor: StringConst.HOME_BG_COLOR,
-        ),
-        preferredSize: Size.fromHeight(44.0),
-      ),
-      backgroundColor: StringConst.HOME_BG_COLOR,
-      body: EasyRefresh(
-          header: BallPulseHeader(),
-          child: ScrollView(),
-          onRefresh: () async {
-            /*HttpUtils.request(
-            '/home',
-            method: HttpUtils.GET
-          ).then((value) => {
-            print(value)
-          }).catchError((e) {
-            print("catchError " + e);
-          });*/
-          }),
-      bottomNavigationBar: new Theme(
-        data: Theme.of(context).copyWith(
-        //设置背景色`BottomNavigationBar`
-        /*canvasColor: Colors.green,*/
-        //设置高亮文字颜色
-        primaryColor: Color(0xFF7F6AFD),
-        //设置一般文字颜色
-        textTheme: Theme.of(context).textTheme.copyWith(caption: new TextStyle(color: Color(0xFFC3C2CE)))),
-        child: BottomView()
-      )
-    );
-  }
-}
 
-// 底部 BottomNavigationBar
-class BottomView extends StatefulWidget {
-  @override
-  _BottomViewState createState() => _BottomViewState();
-}
-
-class _BottomViewState extends State<BottomView> {
-  var index = 0;
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: index,
-      onTap: (int index) {
-        setState(() {
-          this.index = index;
-        }
-        );
-      },
-      type: BottomNavigationBarType.fixed,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(title: Text('首页'),icon: Image.asset('assets/images/tab/icon_tab_home@2x.png',width: 26,height: 26),activeIcon: Image.asset('assets/images/tab/icon_tab_home_pre@2x.png',width: 26,height: 26)),
-        BottomNavigationBarItem(title: Text('商城'),icon: Image.asset('assets/images/tab/icon_tab_shop_normal@2x.png',width: 26,height: 26),activeIcon: Image.asset('assets/images/tab/icon_tab_shop_pre@2x.png',width: 26,height: 26)),
-        BottomNavigationBarItem(title: Text('资讯'),icon: Image.asset('assets/images/tab/icon_tab_kuaixun_normal@2x.png',width: 26,height: 26),activeIcon: Image.asset('assets/images/tab/icon_tab_kuaixun_pre@2x.png',width: 26,height: 26)),
-        BottomNavigationBarItem(title: Text('我的'),icon: Image.asset('assets/images/tab/icon_tab_mine_normal@2x.png',width: 26,height: 26),activeIcon: Image.asset('assets/images/tab/icon_tab_mine_pre@2x.png',width: 26,height: 26)),
-      ],
-    );
-  }
-}
-
-// 首页总览
-class ScrollView extends StatefulWidget {
-  @override
-  _ScrollViewState createState() => _ScrollViewState();
-}
-
-class _ScrollViewState extends State<ScrollView> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 0),
-      child: Column(
-        children: [SwiperView(), NoticeView(), BlockView(), OreView(), RealTimeView(), BottomHintView()],
-      ),
-    );
-  }
-}
-
-// bannar
-class SwiperView extends StatefulWidget {
-  @override
-  _SwiperViewState createState() => _SwiperViewState();
-}
-
-class _SwiperViewState extends State<SwiperView> {
-  List _imageUrls = [
-    'https://img.zcool.cn/community/01223f56fb35ba6ac7257948d78c38.jpg@1280w_1l_2o_100sh.jpg',
-    'https://img.zcool.cn/community/019ecb56fb35ba32f875a944c38d7c.jpg@1280w_1l_2o_100sh.jpg',
-    'https://img.zcool.cn/community/018ab156fb35d26ac7257948c8cc95.jpg@1280w_1l_2o_100sh.jpg',
-  ];
-  @override
-  Widget build(BuildContext context) {
+  // bannar
+  Widget _SwiperView() {
+    List _imageUrls = [
+      'https://img.zcool.cn/community/01223f56fb35ba6ac7257948d78c38.jpg@1280w_1l_2o_100sh.jpg',
+      'https://img.zcool.cn/community/019ecb56fb35ba32f875a944c38d7c.jpg@1280w_1l_2o_100sh.jpg',
+      'https://img.zcool.cn/community/018ab156fb35d26ac7257948c8cc95.jpg@1280w_1l_2o_100sh.jpg',
+    ];
     return ClipRRect(
       borderRadius: BorderRadius.circular(5.0),
       child: Container(
@@ -149,17 +36,9 @@ class _SwiperViewState extends State<SwiperView> {
           )),
     );
   }
-}
 
-// 公告
-class NoticeView extends StatefulWidget {
-  @override
-  _NoticeViewState createState() => _NoticeViewState();
-}
-
-class _NoticeViewState extends State<NoticeView> {
-  @override
-  Widget build(BuildContext context) {
+  // 公告
+  Widget _NoticeView() {
     return Padding(
         padding: EdgeInsets.only(left: 0, right: 0, top: 16, bottom: 0),
         child: Container(
@@ -217,17 +96,9 @@ class _NoticeViewState extends State<NoticeView> {
               },
             )));
   }
-}
 
-// 数据块
-class BlockView extends StatefulWidget {
-  @override
-  _BlockViewState createState() => _BlockViewState();
-}
-
-class _BlockViewState extends State<BlockView> {
-  @override
-  Widget build(BuildContext context) {
+  // 数据块
+  Widget _BlockView() {
     return Padding(
         padding: EdgeInsets.only(left: 0, right: 0, top: 16, bottom: 0),
         child: Container(
@@ -264,8 +135,7 @@ class _BlockViewState extends State<BlockView> {
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w600
-                            ),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                         Align(
@@ -276,10 +146,7 @@ class _BlockViewState extends State<BlockView> {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white
-                            ),
+                            style: TextStyle(fontSize: 12, color: Colors.white),
                           ),
                         )
                       ],
@@ -313,8 +180,7 @@ class _BlockViewState extends State<BlockView> {
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w600
-                            ),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                         Align(
@@ -338,17 +204,9 @@ class _BlockViewState extends State<BlockView> {
           ),
         ));
   }
-}
 
-// 矿场数据
-class OreView extends StatefulWidget {
-  @override
-  _OreViewState createState() => _OreViewState();
-}
-
-class _OreViewState extends State<OreView> {
-  @override
-  Widget build(BuildContext context) {
+  // 矿场数据
+  Widget _OreView() {
     return Column(
       children: [
         Padding(
@@ -360,20 +218,19 @@ class _OreViewState extends State<OreView> {
               style: TextStyle(
                   fontSize: 18,
                   color: Color(0xFF333333),
-                  fontWeight: FontWeight.w600
-              ),
+                  fontWeight: FontWeight.w600),
             ),
           ),
         ),
         Padding(
             padding: EdgeInsets.only(left: 0, right: 0, top: 12, bottom: 0),
             child: Container(
-                width: ScreenUtil().screenWidth,
-                height: ScreenUtil().setWidth(74),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().setWidth(74),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
                       width: ScreenUtil().setWidth(171.5),
                       height: ScreenUtil().screenHeight,
                       decoration: BoxDecoration(
@@ -381,8 +238,7 @@ class _OreViewState extends State<OreView> {
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         color: Colors.white,
                         image: new DecorationImage(
-                          image: AssetImage(
-                              'assets/images/home/222.png'),
+                          image: AssetImage('assets/images/home/222.png'),
                           scale: 2,
                           alignment: Alignment(1, 0),
                         ),
@@ -404,22 +260,26 @@ class _OreViewState extends State<OreView> {
                                 style: TextStyle(
                                     fontSize: 17,
                                     color: Color(0xFFEF876F),
-                                    fontWeight: FontWeight.w600
-                                ),
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                             Align(
-                              alignment: Alignment.centerLeft,
+                                alignment: Alignment.centerLeft,
                                 child: Text.rich(
                                   TextSpan(
                                     children: [
                                       WidgetSpan(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 0, right: 6.0, top: 0, bottom: 1.0),
-                                          child: ImageIcon(AssetImage('assets/images/home/home_icon_reward@2x.png'), size: 12),
-                                        )
-                                      ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 0,
+                                                right: 6.0,
+                                                top: 0,
+                                                bottom: 1.0),
+                                            child: ImageIcon(
+                                                AssetImage(
+                                                    'assets/images/home/home_icon_reward@2x.png'),
+                                                size: 12),
+                                          )),
                                       WidgetSpan(
                                         child: Text(
                                           '24h平均挖矿收益(FIL/TiB)',
@@ -429,8 +289,7 @@ class _OreViewState extends State<OreView> {
                                           maxLines: 1,
                                           style: TextStyle(
                                               fontSize: 12,
-                                              color: Color(0xFF333333)
-                                          ),
+                                              color: Color(0xFF333333)),
                                         ),
                                       )
                                     ],
@@ -438,79 +297,78 @@ class _OreViewState extends State<OreView> {
                                 ))
                           ],
                         ),
-                      )
-                    ),
-                    Container(
-                        width: ScreenUtil().setWidth(171.5),
-                        height: ScreenUtil().screenHeight,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          color: Colors.white,
-                          image: new DecorationImage(
-                            image: AssetImage(
-                                'assets/images/home/222.png'),
-                            scale: 2,
-                            alignment: Alignment(1, 0),
-                          ),
+                      )),
+                  Container(
+                      width: ScreenUtil().setWidth(171.5),
+                      height: ScreenUtil().screenHeight,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Colors.white,
+                        image: new DecorationImage(
+                          image: AssetImage('assets/images/home/222.png'),
+                          scale: 2,
+                          alignment: Alignment(1, 0),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: 15.5, right: 0, top: 0, bottom: 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '499200',
-                                  softWrap: true,
-                                  textAlign: TextAlign.left,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      color: Color(0xFFEF876F),
-                                      fontWeight: FontWeight.w600
-                                  ),
-                                ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 15.5, right: 0, top: 0, bottom: 0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '499200',
+                                softWrap: true,
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Color(0xFFEF876F),
+                                    fontWeight: FontWeight.w600),
                               ),
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        WidgetSpan(
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 0, right: 6.0, top: 0, bottom: 1.0),
-                                              child: ImageIcon(AssetImage('assets/images/home/home_icon_time@2x.png'), size: 12),
-                                            )
+                            ),
+                            Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      WidgetSpan(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 0,
+                                                right: 6.0,
+                                                top: 0,
+                                                bottom: 1.0),
+                                            child: ImageIcon(
+                                                AssetImage(
+                                                    'assets/images/home/home_icon_time@2x.png'),
+                                                size: 12),
+                                          )),
+                                      WidgetSpan(
+                                        child: Text(
+                                          '近24h产出量(FIL)',
+                                          softWrap: true,
+                                          textAlign: TextAlign.left,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Color(0xFF333333)),
                                         ),
-                                        WidgetSpan(
-                                          child: Text(
-                                            '近24h产出量(FIL)',
-                                            softWrap: true,
-                                            textAlign: TextAlign.left,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: Color(0xFF333333)
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ))
-                            ],
-                          ),
-                        )
-                    ),
-                  ],
-                ),
-            )
-        ),
+                                      )
+                                    ],
+                                  ),
+                                ))
+                          ],
+                        ),
+                      )),
+                ],
+              ),
+            )),
         Padding(
             padding: EdgeInsets.only(left: 0, right: 0, top: 8, bottom: 0),
             child: Container(
@@ -527,8 +385,7 @@ class _OreViewState extends State<OreView> {
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         color: Colors.white,
                         image: new DecorationImage(
-                          image: AssetImage(
-                              'assets/images/home/222.png'),
+                          image: AssetImage('assets/images/home/222.png'),
                           scale: 2,
                           alignment: Alignment(1, 0),
                         ),
@@ -550,8 +407,7 @@ class _OreViewState extends State<OreView> {
                                 style: TextStyle(
                                     fontSize: 17,
                                     color: Color(0xFFEF876F),
-                                    fontWeight: FontWeight.w600
-                                ),
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                             Align(
@@ -562,10 +418,15 @@ class _OreViewState extends State<OreView> {
                                       WidgetSpan(
                                           child: Padding(
                                             padding: EdgeInsets.only(
-                                                left: 0, right: 6.0, top: 0, bottom: 1.0),
-                                            child: ImageIcon(AssetImage('assets/images/home/home_icon_number@2x.png'), size: 12),
-                                          )
-                                      ),
+                                                left: 0,
+                                                right: 6.0,
+                                                top: 0,
+                                                bottom: 1.0),
+                                            child: ImageIcon(
+                                                AssetImage(
+                                                    'assets/images/home/home_icon_number@2x.png'),
+                                                size: 12),
+                                          )),
                                       WidgetSpan(
                                         child: Text(
                                           '活跃矿工数(人)',
@@ -575,8 +436,7 @@ class _OreViewState extends State<OreView> {
                                           maxLines: 1,
                                           style: TextStyle(
                                               fontSize: 12,
-                                              color: Color(0xFF333333)
-                                          ),
+                                              color: Color(0xFF333333)),
                                         ),
                                       )
                                     ],
@@ -584,8 +444,7 @@ class _OreViewState extends State<OreView> {
                                 ))
                           ],
                         ),
-                      )
-                  ),
+                      )),
                   Container(
                       width: ScreenUtil().setWidth(171.5),
                       height: ScreenUtil().screenHeight,
@@ -594,8 +453,7 @@ class _OreViewState extends State<OreView> {
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         color: Colors.white,
                         image: new DecorationImage(
-                          image: AssetImage(
-                              'assets/images/home/222.png'),
+                          image: AssetImage('assets/images/home/222.png'),
                           scale: 2,
                           alignment: Alignment(1, 0),
                         ),
@@ -617,8 +475,7 @@ class _OreViewState extends State<OreView> {
                                 style: TextStyle(
                                     fontSize: 17,
                                     color: Color(0xFFEF876F),
-                                    fontWeight: FontWeight.w600
-                                ),
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                             Align(
@@ -629,10 +486,15 @@ class _OreViewState extends State<OreView> {
                                       WidgetSpan(
                                           child: Padding(
                                             padding: EdgeInsets.only(
-                                                left: 0, right: 6.0, top: 0, bottom: 1.0),
-                                            child: ImageIcon(AssetImage('assets/images/home/home_icon_liutong@2x.png'), size: 12),
-                                          )
-                                      ),
+                                                left: 0,
+                                                right: 6.0,
+                                                top: 0,
+                                                bottom: 1.0),
+                                            child: ImageIcon(
+                                                AssetImage(
+                                                    'assets/images/home/home_icon_liutong@2x.png'),
+                                                size: 12),
+                                          )),
                                       WidgetSpan(
                                         child: Text(
                                           '流通总量(FIL)',
@@ -642,8 +504,7 @@ class _OreViewState extends State<OreView> {
                                           maxLines: 1,
                                           style: TextStyle(
                                               fontSize: 12,
-                                              color: Color(0xFF333333)
-                                          ),
+                                              color: Color(0xFF333333)),
                                         ),
                                       )
                                     ],
@@ -651,28 +512,17 @@ class _OreViewState extends State<OreView> {
                                 ))
                           ],
                         ),
-                      )
-                  ),
+                      )),
                 ],
               ),
-            )
-        )
+            ))
       ],
     );
   }
-}
 
-// 实时行情
-class RealTimeView extends StatefulWidget {
-  @override
-  _RealTimeViewState createState() => _RealTimeViewState();
-}
-
-class _RealTimeViewState extends State<RealTimeView> {
-  List realTimedata = [1,2,3,4,5,6,7,8];
-
-  @override
-  Widget build(BuildContext context) {
+  // 实时行情
+  Widget _RealTimeView() {
+    List realTimedata = [1, 2, 3, 4, 5, 6, 7, 8];
     return Column(
       children: [
         Padding(
@@ -684,8 +534,7 @@ class _RealTimeViewState extends State<RealTimeView> {
               style: TextStyle(
                   fontSize: 18,
                   color: Color(0xFF333333),
-                  fontWeight: FontWeight.w600
-              ),
+                  fontWeight: FontWeight.w600),
             ),
           ),
         ),
@@ -697,15 +546,15 @@ class _RealTimeViewState extends State<RealTimeView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: ScreenUtil().setWidth(164),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
-                        child: Text('名称'),
-                      ),
-                    )
-                  ),
+                      width: ScreenUtil().setWidth(164),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 10, right: 0, top: 0, bottom: 0),
+                          child: Text('名称'),
+                        ),
+                      )),
                   Flexible(
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -717,17 +566,16 @@ class _RealTimeViewState extends State<RealTimeView> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 0, right: 10, top: 0, bottom: 0),
+                          padding: EdgeInsets.only(
+                              left: 0, right: 10, top: 0, bottom: 0),
                           child: Text('涨跌幅'),
                         ),
-                      )
-                  ),
+                      )),
                 ],
               ),
-            )
-        ),
+            )),
         Column(
-          children: realTimedata.map((i){
+          children: realTimedata.map((i) {
             return Padding(
                 padding: EdgeInsets.only(left: 0, right: 0, top: 8, bottom: 0),
                 child: Container(
@@ -736,25 +584,33 @@ class _RealTimeViewState extends State<RealTimeView> {
                   decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                           width: ScreenUtil().setWidth(164),
                           child: Padding(
-                            padding: EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
+                            padding: EdgeInsets.only(
+                                left: 10, right: 0, top: 0, bottom: 0),
                             child: Row(
                               children: [
-                                Image.asset('assets/images/home/fil.png',width: 33,height: 33,),
+                                Image.asset(
+                                  'assets/images/home/fil.png',
+                                  width: 33,
+                                  height: 33,
+                                ),
                                 Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
                                         width: ScreenUtil().setWidth(121),
                                         child: Padding(
-                                          padding: EdgeInsets.only(left: 8, right: 0, top: 0, bottom: 0),
+                                          padding: EdgeInsets.only(
+                                              left: 8,
+                                              right: 0,
+                                              top: 0,
+                                              bottom: 0),
                                           child: Text(
                                             'FIL',
                                             softWrap: true,
@@ -763,29 +619,28 @@ class _RealTimeViewState extends State<RealTimeView> {
                                             maxLines: 1,
                                             style: TextStyle(
                                                 fontSize: 17,
-                                                fontWeight: FontWeight.w600
-                                            ),
+                                                fontWeight: FontWeight.w600),
                                           ),
                                         ),
                                       ),
                                       Container(
                                           width: ScreenUtil().setWidth(121),
                                           child: Padding(
-                                            padding: EdgeInsets.only(left: 8, right: 0, top: 0, bottom: 0),
+                                            padding: EdgeInsets.only(
+                                                left: 8,
+                                                right: 0,
+                                                top: 0,
+                                                bottom: 0),
                                             child: Text(
                                               '24H量 125478231',
                                               style: TextStyle(
-                                                  color: Color(0xFF999999)
-                                              ),
+                                                  color: Color(0xFF999999)),
                                             ),
-                                          )
-                                      )
-                                    ]
-                                )
+                                          ))
+                                    ])
                               ],
                             ),
-                          )
-                      ),
+                          )),
                       Flexible(
                         child: Align(
                           alignment: Alignment.centerLeft,
@@ -803,20 +658,17 @@ class _RealTimeViewState extends State<RealTimeView> {
                                         maxLines: 1,
                                         style: TextStyle(
                                             fontSize: 17,
-                                            fontWeight: FontWeight.w600
-                                        ),
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                     Container(
                                       child: Text(
                                         '¥6.57',
-                                        style: TextStyle(
-                                            color: Color(0xFF999999)
-                                        ),
+                                        style:
+                                        TextStyle(color: Color(0xFF999999)),
                                       ),
                                     )
-                                  ]
-                              )
+                                  ])
                             ],
                           ),
                         ),
@@ -824,34 +676,61 @@ class _RealTimeViewState extends State<RealTimeView> {
                       Container(
                           width: ScreenUtil().setWidth(84),
                           child: Padding(
-                            padding: EdgeInsets.only(left: 0, right: 10, top: 0, bottom: 0),
+                            padding: EdgeInsets.only(
+                                left: 0, right: 10, top: 0, bottom: 0),
                             child: Container(
                                 height: ScreenUtil().setWidth(28),
                                 decoration: BoxDecoration(
                                     shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                    color: Color(0xFFC66865)
-                                ),
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)),
+                                    color: Color(0xFFC66865)),
                                 child: Center(
                                   child: Text(
                                     '-0.22%',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,
-                                        fontWeight: FontWeight.w500
-                                    ),
+                                        fontWeight: FontWeight.w500),
                                   ),
-                                )
-                            ),
-                          )
-                      ),
+                                )),
+                          )),
                     ],
                   ),
-                )
-            );
+                ));
           }).toList(),
         )
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return EasyRefresh(
+        header: BallPulseHeader(),
+        child: Padding(
+          padding: EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 0),
+          child: Column(
+            children: [
+              _SwiperView(),
+              _NoticeView(),
+              _BlockView(),
+              _OreView(),
+              _RealTimeView(),
+              BottomHintView()
+            ],
+          ),
+        ),
+        onRefresh: () async {
+          /*HttpUtils.request(
+            '/home',
+            method: HttpUtils.GET
+          ).then((value) => {
+            print(value)
+          }).catchError((e) {
+            print("catchError " + e);
+          });*/
+        }
+      );
   }
 }
