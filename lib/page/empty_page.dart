@@ -3,6 +3,9 @@ import '../const/string_const.dart';
 import 'home_page.dart';
 import 'shop_page.dart';
 import 'new_page.dart';
+import 'me_page.dart';
+import 'appbar/home_appbar.dart';
+import 'appbar/new_appbar.dart';
 
 class EmptyPage extends StatefulWidget {
   @override
@@ -11,63 +14,12 @@ class EmptyPage extends StatefulWidget {
 
 class _EmptyState extends State<EmptyPage> {
   int _index = 0;
-  final List<Widget> chiledList = [HomePage(),ShopView(),NewView(),ShopView()];
+  final List<Widget> chiledList = [HomePage(),ShopView(),NewView(),MePage()];
+  final List<Widget> appBarList = [HomeAppbarView(),null,NewAppbarView(),null];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        /*appBar: _index == 0 ?
-          PreferredSize(
-            child: AppBar(
-              leadingWidth: 102,
-              leading: Container(
-                child: Padding(
-                    padding:
-                    EdgeInsets.only(left: 12, right: 0, top: 0, bottom: 0),
-                    child:
-                    Image.asset('assets/images/home/home_icon_mtlogo@2x.png',
-                    width: 102, height: 32.5)),
-              ),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.chat),
-                  onPressed: () {
-                    print('客服');
-                  },
-                )
-              ],
-              centerTitle: false,
-              elevation: 0,
-              backgroundColor: StringConst.HOME_BG_COLOR,
-            ),
-            preferredSize: Size.fromHeight(44.0),
-          )
-        : null
-        ,*/
-        appBar: PreferredSize(
-          child: AppBar(
-            leadingWidth: 102,
-            leading: Container(
-              child: Padding(
-                  padding:
-                  EdgeInsets.only(left: 12, right: 0, top: 0, bottom: 0),
-                  child:
-                  Image.asset('assets/images/home/home_icon_mtlogo@2x.png',
-                      width: 102, height: 32.5)),
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.chat),
-                onPressed: () {
-                  print('客服');
-                },
-              )
-            ],
-            centerTitle: false,
-            elevation: 0,
-            backgroundColor: StringConst.HOME_BG_COLOR,
-          ),
-          preferredSize: Size.fromHeight(44.0),
-        ),
+        appBar: appBarList[_index],
         backgroundColor: _index == 0 ? StringConst.HOME_BG_COLOR : StringConst.BG_COLOR,
         body: chiledList[_index],
         bottomNavigationBar: new Theme(
@@ -91,6 +43,7 @@ class _EmptyState extends State<EmptyPage> {
                 );
               },
               type: BottomNavigationBarType.fixed,
+              selectedItemColor: Color(0xFF7F6AFD),
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(title: Text('首页'),
                     icon: Image.asset(

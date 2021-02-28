@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                     child: Container(
                       child: Padding(
                         padding: EdgeInsets.only(
-                            left: 6.5, right: 6.5, top: 0, bottom: 0),
+                            left: 6.5, right: 6.5),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(

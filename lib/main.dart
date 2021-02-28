@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/screenutil_init.dart';
 import 'const/string_const.dart';
 import 'const/app_theme.dart';
 import 'page/empty_page.dart';
+import 'page/new/new_details_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           home: EmptyPage(),
+          routes: <String, WidgetBuilder> {
+            '/page1': (context) => NewDetailsPage(),
+          },
         )
       ),
     );
@@ -37,7 +41,8 @@ class RestartWidget extends StatefulWidget {
 
   static restartApp(BuildContext context) {
     final _RestartWidgetState state =
-    context.ancestorStateOfType(const TypeMatcher<_RestartWidgetState>());
+    //context.ancestorStateOfType(const TypeMatcher<_RestartWidgetState>());
+    context.findAncestorStateOfType();
     state.restartApp();
   }
 

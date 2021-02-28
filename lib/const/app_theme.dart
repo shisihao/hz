@@ -3,14 +3,14 @@ import 'package:juxiu/util/color.dart';
 
 class AppTheme {
   // 1.抽取相同的样式
-  static const double _titleFontSize = 20;
+  static const double _titleFontSize = 18;
 
   // 2.亮色主题
   static final ThemeData lightTheme = ThemeData(
       primarySwatch: createMaterialColor(Color(0xFFFFFFFF)),
       primaryTextTheme: TextTheme(
           title: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: _titleFontSize
           )
       ),
