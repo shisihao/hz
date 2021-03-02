@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           home: EmptyPage(),
           routes: <String, WidgetBuilder> {
-            '/page1': (context) => NewDetailsPage(),
+            '/new/details': (context) => NewDetailsPage(),
           },
         )
       ),
